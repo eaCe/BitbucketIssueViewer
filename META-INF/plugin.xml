@@ -1,8 +1,8 @@
 <idea-plugin version="2">
   <id>net.orekyuu.bitbucketissues</id>
-  <name>BitbucketIssues</name>
+  <name>BitbucketIssueViewer</name>
   <version>1.0.1</version>
-  <vendor email="orekyuu@gmail.com" url="http://blog.orekyuu.net">@orekyuu</vendor>
+  <vendor email="orekyuu@gmail.com" url="http://blog.orekyuu.net">orekyuu</vendor>
 
   <description><![CDATA[
       BitbucketIssueViewer
@@ -24,7 +24,7 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <projectService serviceImplementation="net.orekyuu.bitbucketissues.BitbucketIssueService" />
-    <toolWindow id="Bitbucket Issues" icon="/icons/bitbucket.png" anchor="right" factoryClass="net.orekyuu.bitbucketissues.IssueViewFactory">
+    <toolWindow id="Bitbucket Issues" icon="/icons/bitbucket.png" anchor="bottom" factoryClass="net.orekyuu.bitbucketissues.IssueViewFactory">
 
     </toolWindow>
   </extensions>

@@ -77,7 +77,7 @@ public class BitbucketIssueService implements PersistentStateComponent<AuthState
             return gson.fromJson(body, IssuesResponse.class);
         } catch (IOException e) {
             e.printStackTrace();
-            IOExceptionDialog.showErrorDialog("エラーが発生しました", e.getMessage());
+            IOExceptionDialog.showErrorDialog("Error", e.getMessage());
             state.team = null;
             state.repository = null;
             state.userId = null;
