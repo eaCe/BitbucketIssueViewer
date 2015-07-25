@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>net.orekyuu.bitbucketissues</id>
   <name>BitbucketIssueViewer</name>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <vendor email="orekyuu@gmail.com" url="http://blog.orekyuu.net">orekyuu</vendor>
 
   <description><![CDATA[
@@ -9,7 +9,7 @@
     ]]></description>
 
   <change-notes><![CDATA[
-
+      1.0.2: Support Java6
     ]]>
   </change-notes>
 

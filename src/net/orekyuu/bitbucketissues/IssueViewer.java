@@ -7,6 +7,8 @@ import net.orekyuu.bitbucketissues.response.IssuesResponse;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -17,20 +19,25 @@ public class IssueViewer {
     private JPanel panel1;
     private JTable table1;
     private JButton update;
-    private JComboBox<StatusFilter> statusFilter;
-    private JComboBox<UserFilter> userFilter;
+    private JComboBox statusFilter;
+    private JComboBox userFilter;
 
 
     private IssueTableModel dataModel;
     public java.util.List<Issue> issues;
 
-    public Component getRoot(Project project) {
+    public Component getRoot(final Project project) {
         dataModel = new IssueTableModel();
-        statusFilter.setModel(new DefaultComboBoxModel<>(StatusFilter.values()));
-        userFilter.setModel(new DefaultComboBoxModel<>(UserFilter.values()));
+        statusFilter.setModel(new DefaultComboBoxModel(StatusFilter.values()));
+        userFilter.setModel(new DefaultComboBoxModel(UserFilter.values()));
 
         table1.setModel(dataModel);
-        update.addActionListener(e -> updateIssues(project));
+        update.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                IssueViewer.this.updateIssues(project);
+            }
+        });
         table1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -43,7 +50,9 @@ public class IssueViewer {
                     String substring = resource_uri.substring("/1.0/repositories/".length(), resource_uri.length()).replace("issues", "issue");
                     try {
                         Desktop.getDesktop().browse(new URL("https://bitbucket.org/" + substring).toURI());
-                    } catch (IOException | URISyntaxException e1) {
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    } catch (URISyntaxException e1) {
                         e1.printStackTrace();
                     }
                 }
@@ -65,7 +74,9 @@ public class IssueViewer {
         }
 
         dataModel.clear();
-        list.forEach(dataModel::addRow);
+        for (Issue issue : list) {
+            dataModel.addRow(issue);
+        }
 
 
     }
