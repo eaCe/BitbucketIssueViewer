@@ -36,8 +36,8 @@ public class BitbucketIssueService implements PersistentStateComponent<AuthState
             setupDialog.setSize(400, 240);
             setupDialog.setVisible(true);
             state = new AuthState();
-            state.team = setupDialog.getTeam();
-            state.repository = setupDialog.getRepo();
+            state.team = setupDialog.getTeam().toLowerCase();
+            state.repository = setupDialog.getRepo().toLowerCase();
             state.userId = setupDialog.getUserId();
             state.password = setupDialog.getPassword();
         }
@@ -51,9 +51,8 @@ public class BitbucketIssueService implements PersistentStateComponent<AuthState
         String userQuery = UserFilter.ALL == userFilter ? "" : "responsible=" + state.userId;
 
         String query = "";
-        if (userQuery.isEmpty() && statusQuery.isEmpty()) {
-            //query is empty
-        } else {
+        //only process if query isn't empty
+        if (!userQuery.isEmpty() || !statusQuery.isEmpty()) {
             query += "?";
             //どちらかが空ならそのまま繋ぐ
             if (userQuery.isEmpty() ^ statusQuery.isEmpty()) {
